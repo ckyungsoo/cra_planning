@@ -12,5 +12,5 @@ fig_1 = px.box(df[df['rsk_idx_1']=='1 감리위험요소평가'] , x = 'LoB', y 
 st.plotly_chart(fig_1, theme = "streamlit", use_contatiner_width = True)
 
 #본부별 인게이지먼트별 감사인감리대상 식별 개수
-fig = px.box(df[df['rsk_idx_1']=='2 감사인 감리 대상 개별감사업무 선정'] , x = 'LoB', y = 'risk_index')
+fig = px.box(df[df['rsk_idx_2']=='2 감사인 감리 대상 개별감사업무 선정'] , x = 'LoB', y = 'risk_index')
 st.plotly_chart(fig_2, theme = "streamlit", use_contatiner_width = True)
