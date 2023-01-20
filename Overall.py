@@ -9,7 +9,7 @@ with st.sidebar:
     st.write('기준일: ', d.strftime('%Y년 %m월 %d일'))
 
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
-df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d'].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
+df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
 
 #본부별 인게이지먼트별 감리위험요소평가 식별 개수
 st.subheader(':blue[감리위험요소가 식별된 인게이지먼트 분포]')
