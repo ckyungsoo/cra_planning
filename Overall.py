@@ -14,7 +14,7 @@ df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagemen
 
 #Page title
 st.header('본부별 Engagement의 위험 식별 현황')
-st.subheader(d.strftime('%Y년 %m월 %d일')
+st.subheader(d.strftime('%Y년 %m월 %d일'))
 st.write('')
 st.write('')
 st.write('')
