@@ -12,6 +12,12 @@ with st.sidebar:
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
 df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
 
+#Page title
+st.header('본부별 Engagement의 위험 식별 현황')
+st.subheader(d.strftime('%Y년 %m월 %d일')
+st.write('')
+st.write('')
+st.write('')
 #본부별 인게이지먼트별 감리위험요소평가 식별 개수
 st.subheader(':blue[감리위험요소가 식별된 인게이지먼트 분포]')
 fig_1 = px.box(df[df['rsk_idx_1']=='1 감리위험요소평가'] , x = 'LoB', y = 'risk_index')
