@@ -44,8 +44,6 @@ with col1 :
     st.metric(label = '감리위험요소',value = sum_1)
 
     
- 
-    
 with col2:
     st.metric(label = '감사인감리대상', value = sum_2)
 
@@ -73,8 +71,6 @@ st.plotly_chart(fig_3, theme = "streamlit", use_contatiner_width = True)
 st.table(df_selected_1.sort_values(by = ['risk_index'], ascending = False)
 
 
-st.write('')
-st.write('')
 
 #본부별 인게이지먼트별 감사인감리대상 식별 개수
 st.subheader(':blue[Engagement별로 식별한 감사인감리대상위험 개수의 분포]')
