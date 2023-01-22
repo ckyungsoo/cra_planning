@@ -8,7 +8,7 @@ import datetime
 with st.sidebar:
     d = st.date_input("조회일자를 선택하세요", datetime.date(2022,9,30))
     st.write('기준일: ', d.strftime('%Y년 %m월 %d일'))
-    lob = st.selectbox('조회대상 본부를 선택하세요.'('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
+    lob = st.selectbox('조회대상 본부를 선택하세요.',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
 
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
 df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
