@@ -49,12 +49,12 @@ with col2:
     st.metric(label = '감사인감리대상', value = sum_2)
 
 
-with st.expander("본부별 감리위험요소 식별된 engagement 개수"):
+with st.expander("감리위험요소 식별 현황"):
     risky_engs_1 = df_selected_risky_1.groupby(['LoB'])['engagement'].count()
     fig_1 = px.bar(risky_engs_1)
     st.plotly_chart(fig_1, theme = "streamlit", use_contatiner_width = True)
 
-with st.expander("본부별 감사인감리대상 식별된 engagment 개수"):
+with st.expander("감사인감리대상위험 식별 "):
     risky_engs_2 = df_selected_risky_2.groupby(['LoB'])['engagement'].count()
     fig_2 = px.bar(risky_engs_2)
     st.plotly_chart(fig_2, theme = "streamlit", use_contatiner_width = True)
