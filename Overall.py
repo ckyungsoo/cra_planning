@@ -14,7 +14,7 @@ rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
 df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
 
 #Page title
-st.header('본부별 Engagement의 위험 식별 현황')
+st.header('Engagement 위험 식별 현황')
 st.subheader(d.strftime('%Y년 %m월 %d일'))
 st.write('')
 st.write('')
