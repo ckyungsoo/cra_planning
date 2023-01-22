@@ -49,12 +49,12 @@ with col2:
     st.metric(label = '감사인감리대상', value = sum_2)
 
 
-with st.expander("감리위험요소 식별 현황"):
+with st.expander("본부별 감리위험요소가 식별된 Engagement 현황"):
     risky_engs_1 = df_selected_risky_1.groupby(['LoB'])['engagement'].count()
     fig_1 = px.bar(risky_engs_1)
     st.plotly_chart(fig_1, theme = "streamlit", use_contatiner_width = True)
 
-with st.expander("감사인감리대상위험 식별 "):
+with st.expander("본부별 감사인감리대상위험이 식별된 Engagement 현황"):
     risky_engs_2 = df_selected_risky_2.groupby(['LoB'])['engagement'].count()
     fig_2 = px.bar(risky_engs_2)
     st.plotly_chart(fig_2, theme = "streamlit", use_contatiner_width = True)
@@ -66,7 +66,7 @@ st.write('')
 st.write('')
 st.write('')
 #본부별 인게이지먼트별 감리위험요소평가 식별 개수
-st.subheader(':blue[Engagement별로 식별한 감리위험요소 개수의 분포]')
+st.subheader(':blue[감리위험요소 식별 현황]')
 fig_3 = px.box(df[df['rsk_idx_1']=='1 감리위험요소평가'] , x = 'LoB', y = 'risk_index')
 st.plotly_chart(fig_3, theme = "streamlit", use_contatiner_width = True)
 with st.expander("세부내역"):
@@ -76,7 +76,7 @@ st.write('')
 st.write('')
 
 #본부별 인게이지먼트별 감사인감리대상 식별 개수
-st.subheader(':blue[Engagement별로 식별한 감사인감리대상위험 개수의 분포]')
+st.subheader(':blue[ 감사인감리대상위험 식별 현황]')
 fig_4 = px.box(df[df['rsk_idx_1']=='2 감사인 감리 대상 개별감사업무 선정'] , x = 'LoB', y = 'risk_index')
 st.plotly_chart(fig_4, theme = "streamlit", use_contatiner_width = True)
 with st.expander("세부내역"):
