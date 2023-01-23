@@ -4,7 +4,7 @@ import os
 import numpy as np
 import plotly.express as px
 import datetime
-import.matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 with st.sidebar:
     d = st.date_input("조회일자를 선택하세요", datetime.date(2022,9,30))
