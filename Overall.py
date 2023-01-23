@@ -4,7 +4,7 @@ import os
 import numpy as np
 import plotly.express as px
 import datetime
-import matplotlib.pyplot as plt
+
 
 with st.sidebar:
     d = st.date_input("조회일자를 선택하세요", datetime.date(2022,9,30))
@@ -96,4 +96,4 @@ fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean())
 st.plotly_chart(fig_5, theme = "streamlit", use_container_width = True)
 df_2_sorted = df_2[['engagement', '1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정','당기']].rename(columns ={'당기':'자산총계(별도,억원)'})
 df_2_sorted['자산총계(별도,억원)'] = round(df_2_sorted['자산총계(별도,억원)']/100000000)
-st.table(df_2_sorted.style.background_gradient(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
+st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
