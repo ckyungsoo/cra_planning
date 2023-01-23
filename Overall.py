@@ -93,3 +93,6 @@ fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 �
 fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
 fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean())
 st.plotly_chart(fig_5, theme = "streamlit", use_container_width = True)
+df_2_sorted = df_2[['engagement', '1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정','당기']].rename(columns ={'당기':'자산총계(별도,억원)'})
+df_2_sorted['자산총계(별도,억원)'] = round(df_2_sorted['자산총계(별도,억원)']/100000000)
+st.table(df_2_sorted)
