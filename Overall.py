@@ -11,7 +11,13 @@ with st.sidebar:
     lob = st.selectbox('조회대상 본부를 선택하세요.',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
 
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
+fs = pd.read_csv('fs.csv', encoding = 'euc-kr')
 df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
+df_2 = pd.pivot_table(risk_assessment[risk_assessment['date']==d.strftime('%Y-%m-%d')],
+               index = 'engagement', columns = 'rsk_idx_1', values = 'risk_index', aggfunc = 'sum').reset_index()
+fs_asset_sep = fs[(fs['주요계정']=='자산총계')&(fs['연결/별도']=='별도')]
+df_2 = pd.merge(df_2, fs_asset_sep[fs_asset_sep['결산기준일']==d.strftime('%Y-%m-%d')], how = 'left', left_on = 'engagement', right_on = '회사명')
+df_2['당기'] = df_2['당기'].fillna(0)
 
 #Page title
 st.header('Engagement 위험 식별 현황')
@@ -81,3 +87,9 @@ fig_4 = px.box(df[df['rsk_idx_1']=='2 감사인 감리 대상 개별감사업무
 st.plotly_chart(fig_4, theme = "streamlit", use_contatiner_width = True)
 with st.expander("세부내역"):
     st.table(df_selected_2.sort_values(by = ['risk_index'], ascending = False).style.hide_index())
+
+#engagement 위험 식별 현황 scatterplot    
+fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
+fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
+fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean())
+st.plotly_chart(fig_5, theme = "streamlit", use_container_width = True)
