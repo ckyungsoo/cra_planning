@@ -13,7 +13,7 @@ with st.sidebar:
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
 fs = pd.read_csv('fs.csv', encoding = 'euc-kr')
 df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
-df_2 = pd.pivot_table(risk_assessment[risk_assessment['date']==d.strftime('%Y-%m-%d')],
+df_2 = pd.pivot_table(rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')],
                index = 'engagement', columns = 'rsk_idx_1', values = 'risk_index', aggfunc = 'sum').reset_index()
 fs_asset_sep = fs[(fs['주요계정']=='자산총계')&(fs['연결/별도']=='별도')]
 df_2 = pd.merge(df_2, fs_asset_sep[fs_asset_sep['결산기준일']==d.strftime('%Y-%m-%d')], how = 'left', left_on = 'engagement', right_on = '회사명')
