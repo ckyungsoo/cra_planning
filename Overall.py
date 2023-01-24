@@ -86,7 +86,7 @@ col_1, col_2 = st.columns([8,1])
 
 with col_1:
     #engagement 위험 식별 현황 scatterplot    
-    if lob = 'All':
+    if lob == 'All':
         fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
         fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
         fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean(), line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['1 감리위험요소평가'].mean())
