@@ -88,7 +88,7 @@ with col_1:
     df_2_sorted['자산(별도,억원)'] = (df_2_sorted['자산(별도,억원)']/100000000).round()
     with st.expander("세부내역"):
         st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
- with col_2:
+with col_2:
     lob = st.selectbox('조회대상',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
     
 st.write('')
