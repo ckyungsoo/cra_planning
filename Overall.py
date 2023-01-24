@@ -137,5 +137,5 @@ with st.expander("세부내역"):
 lob_2 = st.selectbox('조회대상',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
 #감리위험요소평가
 rsk = '1 감리위험요소평가'
-rsk_table_lob = risk_assessment[(risk_assessment['date']==d.strftime('%Y-%m-%d')&(risk_assessment['LoB']==lob_2)&(risk_assessment['rsk_idx_1']==rsk)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
+rsk_table_lob = risk_assessment[(risk_assessment['date']==d.strftime('%Y-%m-%d'))&(risk_assessment['LoB']==lob_2)&(risk_assessment['rsk_idx_1']==rsk)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
 st.table(rsk_table_lob)                                 
