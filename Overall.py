@@ -83,6 +83,10 @@ df_2_sorted['자산(별도,억원)'] = (df_2_sorted['자산(별도,억원)']/100
 with st.expander("세부내역"):
     st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
 
+st.write('')
+st.write('')
+st.write('')
+
     
 #본부별 인게이지먼트별 감리위험요소평가 식별 개수
 st.subheader(':blue[감리위험요소 식별 현황]')
