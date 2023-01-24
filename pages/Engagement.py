@@ -28,5 +28,6 @@ col5.metric('기타',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rs
 
 
 st.subheader('감사인감리대상위험')
-col6 = st.columns(1)
+col6, col7 = st.columns([1,4])
 col6.metric('개별감사업무선정', rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='1 개별감사업무 선정')]['risk_index'].sum())
+col7.metric('',)
