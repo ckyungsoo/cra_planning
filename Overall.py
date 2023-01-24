@@ -91,8 +91,8 @@ with st.expander("세부내역"):
 
 #engagement 위험 식별 현황 scatterplot    
 fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
-fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
-fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean())
+fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
+fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean(), line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['1 감리위험요소평가'].mean())
 st.plotly_chart(fig_5, theme = "streamlit", use_container_width = True)
 df_2_sorted = df_2[['engagement', '1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정','당기']].rename(columns ={'당기':'자산(별도,억원)'})
 df_2_sorted['자산(별도,억원)'] = round(df_2_sorted['자산(별도,억원)']/100000000)
