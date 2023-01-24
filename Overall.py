@@ -9,7 +9,7 @@ import datetime
 with st.sidebar:
     d = st.date_input("조회일자를 선택하세요", datetime.date(2022,9,30))
     st.write('기준일: ', d.strftime('%Y년 %m월 %d일'))
-    lob = st.selectbox('조회대상 본부를 선택하세요.',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
+    
 
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
 fs = pd.read_csv('fs.csv', encoding = 'euc-kr')
@@ -75,7 +75,12 @@ st.write('')
 
 st.write('Engagement별로 감리위험요소 위험지표는 평균',df_2['1 감리위험요소평가'].mean(),'개 식별되었으며, 감사인감리대상 위험지표는 평균,',df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),'개 식별되었습니다.')
 st.write('')
-#engagement 위험 식별 현황 scatterplot    
+
+col_1, col_2 : st.columns(2)
+with col_1:
+    lob = st.selectbox('조회대상 본부를 선택하세요.',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
+with col_2:
+    #engagement 위험 식별 현황 scatterplot    
 fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
 fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
 fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean(), line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['1 감리위험요소평가'].mean())
@@ -84,7 +89,7 @@ df_2_sorted = df_2[['engagement', '1 감리위험요소평가', '2 감사인 감
 df_2_sorted['자산(별도,억원)'] = (df_2_sorted['자산(별도,억원)']/100000000).round()
 with st.expander("세부내역"):
     st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
-
+    
 st.write('')
 st.write('')
 st.write('')
