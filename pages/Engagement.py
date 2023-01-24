@@ -32,3 +32,13 @@ col6, col7 = st.columns([1,4])
 col6.metric('개별감사업무선정', rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='1 개별감사업무 선정')]['risk_index'].sum())
 col7.metric('','')
 st.table(pd.DataFrame(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_1']=='2 감사인 감리 대상 개별감사업무 선정')&(rsk_assmnt['risk_index']>0)]['rsk_idx_3']).rename(columns = {'rsk_idx_3':'위험지표'}))
+
+st.subheader('RMM의 식별')
+st.write(eng, '는 다음의 RM 중에서 RMM의 식별을 고려할 필요가 있습니다.')
+
+corp_industry = pd.read_excel('corp_industry.xlsx', sheet_name = 'corp_industry')
+rmm = pd.read_excel('corp_industry.xlsx', sheet_name = 'rmm')
+
+industry_selected = corp_industry['Industry'][corp_industry['회사명']== eng].iloc[0]
+rmm_selected = rmm[rmm['Industry']==industry_selected]
+st.write(rmm_selected[['ClientID2','Description']])
