@@ -76,10 +76,9 @@ st.write('')
 st.write('Engagement별로 감리위험요소 위험지표는 평균',df_2['1 감리위험요소평가'].mean(),'개 식별되었으며, 감사인감리대상 위험지표는 평균,',df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),'개 식별되었습니다.')
 st.write('')
 
-col_1, col_2 = st.columns([1,7])
+col_1, col_2 = st.columns([8,1])
+
 with col_1:
-    lob = st.selectbox('조회대상 본부를 선택하세요.',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
-with col_2:
     #engagement 위험 식별 현황 scatterplot    
     fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
     fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
@@ -89,6 +88,8 @@ with col_2:
     df_2_sorted['자산(별도,억원)'] = (df_2_sorted['자산(별도,억원)']/100000000).round()
     with st.expander("세부내역"):
         st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
+ with col_2:
+    lob = st.selectbox('조회대상',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
     
 st.write('')
 st.write('')
