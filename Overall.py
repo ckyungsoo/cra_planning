@@ -13,12 +13,18 @@ with st.sidebar:
 
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
 fs = pd.read_csv('fs.csv', encoding = 'euc-kr')
+corp_list = pd.read_csv('corp_list.csv', encoding = 'euc-kr')
 df = rsk_assmnt[rsk_assmnt['date']== d.strftime('%Y-%m-%d')].groupby(['engagement','LoB','rsk_idx_1'])['risk_index'].sum().reset_index()
 df_2 = pd.pivot_table(rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')],
                index = 'engagement', columns = 'rsk_idx_1', values = 'risk_index', aggfunc = 'sum').reset_index()
 fs_asset_sep = fs[(fs['주요계정']=='자산총계')&(fs['연결/별도']=='별도')]
 df_2 = pd.merge(df_2, fs_asset_sep[fs_asset_sep['결산기준일']==d.strftime('%Y-%m-%d')], how = 'left', left_on = 'engagement', right_on = '회사명')
 df_2['당기'] = df_2['당기'].fillna(0)
+df_2 = df_2[['engagement', '1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정', '재무제표종류', '재무제표구분',
+       '연결/별도', 'Industry', '상장시장', '결산기준일', 'Year',
+       '주요계정', '계정코드', '당기']]
+df_2 = pd.merge(df_2,corp_list, how = 'left', on = 'engagement')
+
 
 #Page title
 st.header('Engagement 위험 식별 현황')
@@ -80,14 +86,24 @@ col_1, col_2 = st.columns([8,1])
 
 with col_1:
     #engagement 위험 식별 현황 scatterplot    
-    fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
-    fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
-    fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean(), line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['1 감리위험요소평가'].mean())
-    st.plotly_chart(fig_5, theme = "streamlit", use_container_width = True)
-    df_2_sorted = df_2[['engagement', '1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정','당기']].rename(columns ={'당기':'자산(별도,억원)'})
-    df_2_sorted['자산(별도,억원)'] = (df_2_sorted['자산(별도,억원)']/100000000).round()
-    with st.expander("세부내역"):
-        st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
+    if lob = 'All':
+        fig_5 = px.scatter(df_2, x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
+        fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
+        fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean(), line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['1 감리위험요소평가'].mean())
+        st.plotly_chart(fig_5, theme = "streamlit", use_container_width = True)
+        df_2_sorted = df_2[['engagement', '1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정','당기']].rename(columns ={'당기':'자산(별도,억원)'})
+        df_2_sorted['자산(별도,억원)'] = (df_2_sorted['자산(별도,억원)']/100000000).round()
+        with st.expander("세부내역"):
+            st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
+    else :
+        fig_5 = px.scatter(df_2[df_2['LoB']==lob], x='1 감리위험요소평가', y='2 감사인 감리 대상 개별감사업무 선정',size = '당기', color = 'engagement',log_x = False, size_max = 60)
+        fig_5.add_hline(y = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['2 감사인 감리 대상 개별감사업무 선정'].mean())
+        fig_5.add_vline(x = df_2['1 감리위험요소평가'].mean(), line_width = 0.5, line_dash = 'dash', line_color = 'red', annotation_text = df_2['1 감리위험요소평가'].mean())
+        st.plotly_chart(fig_5, theme = "streamlit", use_container_width = True)
+        df_2_sorted = df_2[df_2['LoB']==lob][['engagement', '1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정','당기']].rename(columns ={'당기':'자산(별도,억원)'})
+        df_2_sorted['자산(별도,억원)'] = (df_2_sorted['자산(별도,억원)']/100000000).round()
+        with st.expander("세부내역"):
+            st.table(df_2_sorted.style.highlight_max(subset=['1 감리위험요소평가', '2 감사인 감리 대상 개별감사업무 선정']))
 with col_2:
     lob = st.selectbox('조회대상',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
     
