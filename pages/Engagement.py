@@ -25,7 +25,7 @@ col4.metric('한계기업',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'
 
 col5.metric('기타',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='5 기타')]['risk_index'].sum())
 
-st.write(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_1']=='1 감리위험요소평가')&(rsk_assmnt['risk_index']>0)]['rsk_idx_3'])
+st.write(tuple(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_1']=='1 감리위험요소평가')&(rsk_assmnt['risk_index']>0)]['rsk_idx_3']))
 
 st.subheader('감사인감리대상위험')
 col6, col7 = st.columns([1,4])
