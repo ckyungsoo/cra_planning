@@ -82,12 +82,12 @@ st.write('')
 st.write('Engagement별로 감리위험요소 위험지표는 평균',df_2['1 감리위험요소평가'].mean(),'개 식별되었으며, 감사인감리대상 위험지표는 평균,',df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),'개 식별되었습니다.')
 st.write('')
 
-col_1, col_2 = st.columns([2,8])
+col3, col4 = st.columns([2,8])
 
-with col_1:
+with col3:
     lob = st.selectbox('조회대상',('All','CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
     
-with col_2:
+with col4:
     st.write('')
     
 #engagement 위험 식별 현황 scatterplot    
@@ -134,8 +134,17 @@ with st.expander("세부내역"):
     st.table(df_selected_2.sort_values(by = ['risk_index'], ascending = False).style.hide_index())
 
 #본부 engaement 별 위험지표 식별현황
-lob_2 = st.selectbox('조회대상',('CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
+col5, col6 = st.columns([2,8])
+with col5:
+    lob_2 = st.selectbox('조회대상',('CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
+    
+with col6:
+    st.write('')
 #감리위험요소평가
 rsk = '1 감리위험요소평가'
-rsk_table_lob = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
-st.table(rsk_table_lob)                                 
+rsk_table_lob_1 = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
+st.table(rsk_table_lob_1)                                 
+#감사인 감리대상
+rsk = '2 감사인 감리 대상 개별감사업무 선정'
+rsk_table_lob_2 = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
+st.table(rsk_table_lob_2)   
