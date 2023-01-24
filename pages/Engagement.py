@@ -23,7 +23,7 @@ with col3:
 with col4:
     st.metric('한계기업',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='4 한계기업')]['risk_index'].sum()
 with col5:
-    st.metric('기타',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='5 ')]['risk_index'].sum()
+    st.metric('기타',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='5 기타')]['risk_index'].sum()
 
 
 
