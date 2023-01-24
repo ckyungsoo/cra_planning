@@ -15,15 +15,15 @@ with st.sidebar:
 st.subheader('감리위험요소평가')
 col1, col2, col3, col4, col5 = st.columns(5)
 
-col1.metric('표본심사',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='1 표본심사')]['risk_index'].sum()
+col1.metric('표본심사',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='1 표본심사')]['risk_index'].sum())
 
-col2.metric('직권지정',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='2 직권지정')]['risk_index'].sum()
+col2.metric('직권지정',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='2 직권지정')]['risk_index'].sum())
 
-col3.metric('관리종목',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='3 관리종목')]['risk_index'].sum()
+col3.metric('관리종목',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='3 관리종목')]['risk_index'].sum())
 
-col4.metric('한계기업',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='4 한계기업')]['risk_index'].sum()
+col4.metric('한계기업',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='4 한계기업')]['risk_index'].sum())
 
-col5.metric('기타',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='5 기타')]['risk_index'].sum()
+col5.metric('기타',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='5 기타')]['risk_index'].sum())
 
 
 
