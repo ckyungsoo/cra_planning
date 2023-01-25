@@ -131,7 +131,7 @@ st.plotly_chart(fig_3, theme = "streamlit", use_contatiner_width = True)
 st.write('감리위험요소가 유의적(*)으로 식별된 Engaement는 다음과 같습니다.')
 st.caption(':blue[(*)감리위험요소 식별 개수 분포의 3분위수(75%)(법인 전체 Engagment기준)를 초과하는 Engagement를 유의적이라 판단하였습니다.]')
 st.table(df_selected_1[df_selected_1['risk_index'] > df_selected_1['risk_index'].quantile(q=0.75)].rename(columns = {'risk_index':'감리위험요소'}))
-with st.expander("세부내역"):
+with st.expander("전체내역"):
     st.table(df_selected_1.sort_values(by = ['risk_index'], ascending = False).style.hide_index())
 
 st.write('')
@@ -144,7 +144,7 @@ st.plotly_chart(fig_4, theme = "streamlit", use_contatiner_width = True)
 st.write('감사인감리대상위험요소가 유의적(*)으로 식별된 Engaement는 다음과 같습니다.')
 st.caption(':blue[(*)감사인감리위험요소 식별 개수 분포의 3분위수(75%)(법인 전체 Engagment기준)를 초과하는 Engagement를 유의적이라 판단하였습니다.]')
 st.table(df_selected_2[df_selected_2['risk_index'] > df_selected_2['risk_index'].quantile(q=0.75)].rename(columns = {'risk_index':'감사인감리대상'}))
-with st.expander("세부내역"):
+with st.expander("전체내역"):
     st.table(df_selected_2.sort_values(by = ['risk_index'], ascending = False).style.hide_index())
 
 #본부 engaement 별 위험지표 식별현황
