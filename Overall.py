@@ -184,4 +184,4 @@ rsk_assmnt_sorted = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk
 st.write(engmnt_2,'가 식별한 감사인감리대상위험요소의 세부내역은 아래와 같습니다.')
 st.table(rsk_assmnt_sorted.rename(columns={'rsk_idx_2':'구분','rsk_idx_3':'내용'}))
 
-st.table(rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')].groupby(['no','engagement','LoB','rsk_idx_1','rsk_idx_2','rsk_idx_3'])['risk_index'].sum().unstack())
+st.table(rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')])#.groupby(['no','engagement','LoB','rsk_idx_1','rsk_idx_2','rsk_idx_3'])['risk_index'].sum().unstack())
