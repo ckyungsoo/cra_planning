@@ -87,7 +87,7 @@ st.write('')
 st.write('')
 
 st.subheader('위험요소가 식별된 Engagement 분포')
-st.write('Engagement별로 감리위험요소 위험지표는 평균',df_2['1 감리위험요소평가'].mean(),'개 식별되었으며, 감사인감리대상 위험지표는 평균,',df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),'개 식별되었습니다.')
+st.write('Engagement별로 감리위험요소 위험요소는 평균',df_2['1 감리위험요소평가'].mean(),'개 식별되었으며, 감사인감리대상 위험요소는 평균,',df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),'개 식별되었습니다.')
 st.write('')
 
 col3, col4 = st.columns([2,8])
@@ -126,6 +126,7 @@ st.write('')
     
 #본부별 인게이지먼트별 감리위험요소평가 식별 개수
 st.subheader('감리위험요소 식별 현황')
+st.table(df_selected_1[df_selected_1['1 감리위험요소평가'] == df_selected_1['1 감리위험요소평가'].quantile(q=0.75)])
 fig_3 = px.box(df[df['rsk_idx_1']=='1 감리위험요소평가'] , x = 'LoB', y = 'risk_index')
 st.plotly_chart(fig_3, theme = "streamlit", use_contatiner_width = True)
 with st.expander("세부내역"):
