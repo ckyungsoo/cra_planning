@@ -147,6 +147,10 @@ st.table(df_selected_2[df_selected_2['risk_index'] > df_selected_2['risk_index']
 with st.expander("전체내역"):
     st.table(df_selected_2.sort_values(by = ['risk_index'], ascending = False).style.hide_index())
 
+st.write('')
+st.write('')
+st.write('')
+
 #본부 engaement 별 위험지표 식별현황
 st.subheader('위험요소 항목별 세부 내역')
 st.write('본부 Engagement별로 식별한 위험요소의 세부내역은 다음과 같습니다.')
@@ -157,6 +161,8 @@ with col5:
 with col6:
     st.write('')
 #감리위험요소평가
+st.write('')
+st.write('')
 st.write(lob_2,'의 Engagement가 식별한 감리위험요소의 항목별 내역은 아래와 같습니다.')
 rsk = '1 감리위험요소평가'
 rsk_table_lob_1 = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
@@ -167,6 +173,8 @@ st.write(engmnt,'가 식별한 감리위험요소의 세부내역은 아래와 �
 st.table(rsk_assmnt_sorted.rename(columns={'rsk_idx_2':'구분','rsk_idx_3':'내용'}))
                       
 #감사인 감리대상
+st.write('')
+st.write('')
 st.write(lob_2,'의 Engagement가 식별한 감사인감리대상위험요소의 항목별 내역은 아래와 같습니다.')
 rsk_2 = '2 감사인 감리 대상 개별감사업무 선정'
 rsk_table_lob_2 = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk_2)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
