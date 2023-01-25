@@ -187,7 +187,7 @@ st.table(rsk_assmnt_sorted.rename(columns={'rsk_idx_2':'구분','rsk_idx_3':'내
 st.subheader('전체 Table 다운로드')
 rsk_table = rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')]#
 st.download_button(
-    label = 'Download data as CSV",
+    label = 'Download data as CSV',
     data = rsk_table,
     file_name = 'risk_assessment.csv',)
 with st.expander("전체table"):
