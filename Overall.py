@@ -55,11 +55,11 @@ eng_cnt = len(set(rsk_assmnt['engagement']))
 st.subheader('위험요소가 식별된 Engagement')
 col1, col2 = st.columns(2)
 with col1 :
-    st.metric(label = '감리위험요소',value = sum_1)
+    st.metric(label = ':red[감리위험요소]',value = sum_1)
 
     
 with col2:
-    st.metric(label = '감사인감리대상', value = sum_2)
+    st.metric(label = 'red:[감사인감리대상]', value = sum_2)
 
 
 with st.expander("본부별 감리위험요소가 식별된 Engagement 현황"):
