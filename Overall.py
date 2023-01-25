@@ -189,6 +189,6 @@ rsk_table = rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')]#
 st.download_button(
     label = 'Download data as CSV",
     data = rsk_table,
-    file_name = 'risk_assessment.csv')
+    file_name = 'risk_assessment.csv',)
 with st.expander("전체table"):
     st.table(rsk_table)
