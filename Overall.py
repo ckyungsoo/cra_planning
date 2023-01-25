@@ -34,9 +34,11 @@ with col_b:
     st.write('')
     st.write('')
     st.write(d.strftime('%Y년 %m월 %d일'))
+
 st.write('')
 st.write('')
 st.write('')
+
 #법인전체 위험지표가 식별된 인게이지먼트
 #sorting 기준일 : 선택한 기준일, 위험평가지표 구분 : rsk_idx_1, 집계기준 : LoB,인게이지먼트별 risk_index의 합계
 df_selected_1 = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['rsk_idx_1']=='1 감리위험요소평가')].groupby(['LoB','engagement'])['risk_index'].sum().reset_index()
@@ -57,7 +59,7 @@ sum_2_t = df_selected_risky_2.groupby(['LoB'])['engagement'].count().reset_index
 #전체 Enagement 개수
 eng_cnt = len(set(rsk_assmnt['engagement']))
 
-st.subheader('위험요소가 식별된 Engagement')
+st.subheader('위험요소가 식별된 Engagement 수')
 col1, col2 = st.columns(2)
 with col1 :
     st.metric(label = ':red[감리위험요소]',value = sum_1)
@@ -66,7 +68,8 @@ with col1 :
 with col2:
     st.metric(label = ':red[감사인감리대상]', value = sum_2)
 
-
+st.write(d.strftime('%Y년 %m월 %d일'),' 현재 법인의 감사 engagement(*)',eng_cnt,'개 중 감리위험요소가 식별된 engagement는', sum_1,'개이며 감사인감리대상위험요소가 식별된 engagement는',sum_2,'개입니다.')
+st.caption('(*)  감사대상 engagment중 재무제표를 DART에 공시하는 법인으로 임의감사 등 공시 재무정보를 수집할 수 없는 engagement는 제외하였습니다.')
 with st.expander("본부별 감리위험요소가 식별된 Engagement 현황"):
     risky_engs_1 = df_selected_risky_1.groupby(['LoB'])['engagement'].count()
     fig_1 = px.bar(risky_engs_1)
@@ -77,13 +80,13 @@ with st.expander("본부별 감사인감리대상위험이 식별된 Engagement 
     fig_2 = px.bar(risky_engs_2)
     st.plotly_chart(fig_2, theme = "streamlit", use_contatiner_width = True)
     
-st.write(d.strftime('%Y년 %m월 %d일'),' 현재 법인의 감사 engagement(*)',eng_cnt,'개 중 감리위험요소가 식별된 engagement는', sum_1,'개이며 감사인감리대상위험요소가 식별된 engagement는',sum_2,'개입니다.')
-st.caption('(*)  감사대상 engagment중 재무제표를 DART에 공시하는 법인으로 임의감사 등 공시 재무정보를 수집할 수 없는 engagement는 제외하였습니다.')
+
 
 st.write('')
 st.write('')
 st.write('')
 
+st.subheader('위험요소가 식별된 Engagement 분포')
 st.write('Engagement별로 감리위험요소 위험지표는 평균',df_2['1 감리위험요소평가'].mean(),'개 식별되었으며, 감사인감리대상 위험지표는 평균,',df_2['2 감사인 감리 대상 개별감사업무 선정'].mean(),'개 식별되었습니다.')
 st.write('')
 
