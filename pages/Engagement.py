@@ -26,14 +26,14 @@ col4.metric('한계기업',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'
 
 col5.metric('기타',rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='5 기타')]['risk_index'].sum())
 
-st.write(eng,'는 다음의 요인으로 감리위험요소가 있다고 판단하였습니다.')
+st.write('다음의 요인으로',eng,'에 감리위험요소가 있다고 판단하였습니다.')
 st.table(pd.DataFrame(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_1']=='1 감리위험요소평가')&(rsk_assmnt['risk_index']>0)]['rsk_idx_3']).rename(columns = {'rsk_idx_3':'위험지표'}))
 
 st.subheader('감사인감리대상위험')
 col6, col7 = st.columns([1,4])
 col6.metric('개별감사업무선정', rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_2']=='1 개별감사업무 선정')]['risk_index'].sum())
 col7.metric('','')
-st.write(eng,'는 다음의 요인으로 감사인감리대상위험요소가 있다고 판단하였습니다.')
+st.write('다음의 요인으로',eng,'에 감사인감리대상위험요소가 있다고 판단하였습니다.')
 st.table(pd.DataFrame(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_1']=='2 감사인 감리 대상 개별감사업무 선정')&(rsk_assmnt['risk_index']>0)]['rsk_idx_3']).rename(columns = {'rsk_idx_3':'위험지표'}))
 
 st.subheader('RMM의 식별')
