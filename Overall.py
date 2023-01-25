@@ -148,26 +148,30 @@ with st.expander("전체내역"):
     st.table(df_selected_2.sort_values(by = ['risk_index'], ascending = False).style.hide_index())
 
 #본부 engaement 별 위험지표 식별현황
+st.subheader('위험요소 항목별 세부 내역')
+st.write('본부 Engagement별로 식별한 위험요소의 세부내역은 다음과 같습니다.')
 col5, col6 = st.columns([2,8])
 with col5:
-    lob_2 = st.selectbox('조회대상',('CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
+    lob_2 = st.selectbox('조회본부선택',('CM1','CM2','ICE1','ICE2','ICE3','IGH','IM1','IM2','IM3','IM4'))
     
 with col6:
     st.write('')
 #감리위험요소평가
-st.subheader('감리위험요소 항목별 세부')
+st.write(lob_2,' Engagement가 식별한 감리위험요소의 항목별 내역은 아래와 같습니다.')
 rsk = '1 감리위험요소평가'
 rsk_table_lob_1 = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
 st.table(rsk_table_lob_1)
 engmnt = st.selectbox('Engagement 선택',tuple(set(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)].engagement)))
 rsk_assmnt_sorted = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk)&(rsk_assmnt['engagement']==engmnt)&(rsk_assmnt['risk_index']>0)][['rsk_idx_2','rsk_idx_3']]
+st.write(engmnt,'가 식별한 위험요소의 세부내역은 아래와 같습니다.')
 st.table(rsk_assmnt_sorted.rename(columns={'rsk_idx_2':'구분','rsk_idx_3':'내용'}))
                       
 #감사인 감리대상
-st.subheader('감사인감리대상위험 항목별 세부')
+st.write(lob_2,' Engagement가 식별한 감사인감리대상위험요소의 항목별 내역은 아래와 같습니다.')
 rsk_2 = '2 감사인 감리 대상 개별감사업무 선정'
 rsk_table_lob_2 = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk_2)].groupby(['engagement','rsk_idx_2'])['risk_index'].sum().unstack()
 st.table(rsk_table_lob_2)   
 engmnt_2 = st.selectbox('Engagement 선택.',tuple(set(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)].engagement)))
 rsk_assmnt_sorted = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk_2)&(rsk_assmnt['engagement']==engmnt_2)&(rsk_assmnt['risk_index']>0)][['rsk_idx_2','rsk_idx_3']]
+st.write(engmnt_2,'가 식별한 위험요소의 세부내역은 아래와 같습니다.')
 st.table(rsk_assmnt_sorted.rename(columns={'rsk_idx_2':'구분','rsk_idx_3':'내용'}))
