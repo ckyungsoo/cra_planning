@@ -126,7 +126,7 @@ st.write('')
     
 #본부별 인게이지먼트별 감리위험요소평가 식별 개수
 st.subheader('감리위험요소 식별 현황')
-st.table(df_selected_1[df_selected_1['1 감리위험요소평가'] == df_selected_1['1 감리위험요소평가'].quantile(q=0.75)])
+st.table(df_selected_1[df_selected_1['risk_index'] == df_selected_1['risk_index'].quantile(q=0.75)])
 fig_3 = px.box(df[df['rsk_idx_1']=='1 감리위험요소평가'] , x = 'LoB', y = 'risk_index')
 st.plotly_chart(fig_3, theme = "streamlit", use_contatiner_width = True)
 with st.expander("세부내역"):
