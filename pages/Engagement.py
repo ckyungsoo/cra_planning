@@ -37,7 +37,7 @@ st.write('다음의 요인으로',eng,'에 감사인감리대상위험요소가 
 st.table(pd.DataFrame(rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['engagement']==eng)&(rsk_assmnt['rsk_idx_1']=='2 감사인 감리 대상 개별감사업무 선정')&(rsk_assmnt['risk_index']>0)]['rsk_idx_3']).rename(columns = {'rsk_idx_3':'위험지표'}))
 
 st.subheader('RMM의 식별')
-st.write(eng, '는 다음의 RM 중에서 RMM의 식별을 고려할 필요가 있습니다.')
+st.write(eng, '은(는) 다음의 RM 중에서 RMM의 식별을 고려할 필요가 있습니다.')
 
 corp_industry = pd.read_excel('corp_industry.xlsx', sheet_name = 'corp_industry')
 rmm = pd.read_excel('corp_industry.xlsx', sheet_name = 'rmm')
