@@ -117,7 +117,7 @@ st.write('')
 
     
 #본부별 인게이지먼트별 감리위험요소평가 식별 개수
-st.subheader(':blue[감리위험요소 식별 현황]')
+st.subheader('감리위험요소 식별 현황')
 fig_3 = px.box(df[df['rsk_idx_1']=='1 감리위험요소평가'] , x = 'LoB', y = 'risk_index')
 st.plotly_chart(fig_3, theme = "streamlit", use_contatiner_width = True)
 with st.expander("세부내역"):
@@ -127,7 +127,7 @@ st.write('')
 st.write('')
 
 #본부별 인게이지먼트별 감사인감리대상 식별 개수
-st.subheader(':blue[ 감사인감리대상위험 식별 현황]')
+st.subheader('감사인감리대상위험 식별 현황')
 fig_4 = px.box(df[df['rsk_idx_1']=='2 감사인 감리 대상 개별감사업무 선정'] , x = 'LoB', y = 'risk_index')
 st.plotly_chart(fig_4, theme = "streamlit", use_contatiner_width = True)
 with st.expander("세부내역"):
