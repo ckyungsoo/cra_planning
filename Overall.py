@@ -10,7 +10,7 @@ with st.sidebar:
     d = st.date_input("조회일자를 선택하세요", datetime.date(2022,9,30))
     st.write('기준일: ', d.strftime('%Y년 %m월 %d일'))
     
-
+#data table 편집
 rsk_assmnt = pd.read_csv('risk_assessment.csv', encoding = 'euc-kr')
 fs = pd.read_csv('fs.csv', encoding = 'euc-kr')
 corp_list = pd.read_csv('corp_list.csv', encoding = 'euc-kr')
@@ -27,8 +27,11 @@ df_2 = pd.merge(df_2,corp_list, how = 'left', on = 'engagement')
 
 
 #Page title
-st.header('Engagement 위험 식별 현황')
-st.subheader(d.strftime('%Y년 %m월 %d일'))
+col_a, col_b = st.columns([6,4])
+with col_a:
+    st.header('Engagement 위험 식별 현황')
+with col_b:
+    st.subheader(d.strftime('%Y년 %m월 %d일'))
 st.write('')
 st.write('')
 st.write('')
