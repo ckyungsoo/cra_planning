@@ -183,3 +183,5 @@ engmnt_2 = st.selectbox('Engagement 선택.',tuple(set(rsk_assmnt[(rsk_assmnt['d
 rsk_assmnt_sorted = rsk_assmnt[(rsk_assmnt['date']==d.strftime('%Y-%m-%d'))&(rsk_assmnt['LoB']==lob_2)&(rsk_assmnt['rsk_idx_1']==rsk_2)&(rsk_assmnt['engagement']==engmnt_2)&(rsk_assmnt['risk_index']>0)][['rsk_idx_2','rsk_idx_3']]
 st.write(engmnt_2,'가 식별한 감사인감리대상위험요소의 세부내역은 아래와 같습니다.')
 st.table(rsk_assmnt_sorted.rename(columns={'rsk_idx_2':'구분','rsk_idx_3':'내용'}))
+
+st.table(rsk_assment)
