@@ -59,7 +59,7 @@ with col1 :
 
     
 with col2:
-    st.metric(label = 'red:[감사인감리대상]', value = sum_2)
+    st.metric(label = ':red[감사인감리대상]', value = sum_2)
 
 
 with st.expander("본부별 감리위험요소가 식별된 Engagement 현황"):
