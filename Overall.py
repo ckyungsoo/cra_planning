@@ -185,11 +185,14 @@ st.write(engmnt_2,'가 식별한 감사인감리대상위험요소의 세부내�
 st.table(rsk_assmnt_sorted.rename(columns={'rsk_idx_2':'구분','rsk_idx_3':'내용'}))
 
 st.subheader('전체 Table 다운로드')
-
-rsk_table = rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')].to_csv().encode('euc-kr')
+def convert_df(df):
+    return df.to_csv().encode('euc-kr')
+rsk_table = rsk_assmnt[rsk_assmnt['date']==d.strftime('%Y-%m-%d')]
+csv = convert_df(rsk_table)
 st.download_button(
     label = 'Download data as CSV',
-    data = rsk_table,
-    file_name = 'risk_assessment.csv',)
+    data = csv,
+    file_name = 'risk_assessment.csv',
+    mime = 'text/csv',)
 with st.expander("전체table"):
     st.table(rsk_table)
